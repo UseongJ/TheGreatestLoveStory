@@ -16,29 +16,32 @@
             background-position: top left; /* 배경 이미지 위치 조절: 왼쪽 위 */
             background-size: cover; /* 배경 이미지 크기 조절: 화면을 꽉 채움 */
             background-repeat: no-repeat; /* 배경 이미지 반복 방지 */
-            background-color: rgba(248, 249, 250, 0.8); /* 배경색 투명도 조절 */
         }
         .container {
-            padding: 20px;
+            padding: 20px; /*쿼트박스 위치 조절*/
         }
         .quote-box {
             background-color: #ffffff;
-            padding: 50px 30px; /* 상하 15px, 좌우 30px 여백 설정 */
-            margin: 40px auto;
+            padding: 45px 35px; /*상하, 좌우 문단 여백 설정 */
+            text-align: left; /*왼쪽정렬*/
+            line-height: 1.5; /*줄 간격*/
             margin-top: 230px;/* 위쪽 여백 */
             margin-left: 10%; /* 왼쪽 여백 10% */
             margin-right: 10%; /* 오른쪽 여백 10% */
             border-radius: 12px;
             background-color: rgba(248, 249, 250, 0.8); /* 배경색 투명도 조절 */
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            max-width: 80%;
-            font-size: 20px;
+            font-size: 15px; /*글자 크기*/
             font-weight: bold;
+    /* 크기 고정 */
+    max-width: 600px;
+    height: 180px;
+    overflow: auto; /* 넘칠 경우 스크롤 */
         }
         .button {
-    margin-top: 60px; /* 위쪽 여백 */
+    margin-top: 80px; /* 위쪽 여백 */
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #007bf0; /*버튼 디자인*/
     color: white;
     border: none;
     border-radius: 5px;
@@ -109,20 +112,20 @@
 <body>
     <div class="container">
 
-        <!-- 랜덤 명언 출력 -->
+        <!-- 랜덤 성구 출력 -->
         <div class="quote-box" id="quoteBox">Loading...</div>
 
-        <!-- 국가 선택 버튼 -->
+        <!-- 대학 선택 버튼 -->
         <button class="button" onclick="openModal()">우리학교 CCC 찾기</button>
 
         <!-- 모달 -->
-        <div id="countryModal" class="modal">
+        <div id="CampusModal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
-                <h3>국가 선택</h3>
+                <h3>대학 선택</h3>
                 <p>누르면 사이트로 이동합니다</p>
                 <div class="dropdown">
-                    <input type="text" id="searchBox" placeholder="국가 검색..." onkeyup="filterCountries()" onkeydown="navigateList(event)">
+                    <input type="text" id="searchBox" placeholder="대학 검색..." onkeyup="filterCountries()" onkeydown="navigateList(event)">
                     <div id="dropdownList" class="dropdown-list"></div>
                 </div>
             </div>
@@ -132,25 +135,24 @@
     <script>
         // 랜덤 명언 설정
         const quotes = [
-            "The only limit to our realization of tomorrow is our doubts of today.",
-            "Do what you can, with what you have, where you are.",
-            "Success is not final, failure is not fatal: it is the courage to continue that counts."
+"삼가 누가 누구에게든지 악으로 악을 갚지 말게 하고 서로 대하든지 모든 사람을 대하든지 항상 선을 따르라 항상 기뻐하라 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라\n\n[데살로니가전서 5:15-18]",
+"Do what you can, with what you have, where you are.",
+"Success is not final, failure is not fatal: it is the courage to continue that counts."
         ];
         document.getElementById("quoteBox").innerText = quotes[Math.floor(Math.random() * quotes.length)];
-
-        // 국가 리스트
+        //  리스트
         const countries = ["USA", "Korea", "Japan", "Germany", "France", "UK", "China", "India"];
         let selectedIndex = -1; // 선택된 리스트 인덱스
 
         // 모달 열기
         function openModal() {
-            document.getElementById("countryModal").style.display = "block";
+            document.getElementById("CampusModal").style.display = "block";
             document.getElementById("searchBox").focus();
         }
 
         // 모달 닫기
         function closeModal() {
-            document.getElementById("countryModal").style.display = "none";
+            document.getElementById("CampusModal").style.display = "none";
             document.getElementById("dropdownList").style.display = "none";
         }
 
@@ -161,17 +163,17 @@
             dropdown.innerHTML = "";
             selectedIndex = -1;
 
-            let filtered = countries.filter(country => country.toLowerCase().includes(input));
+            let filtered = countries.filter(Campus => Campus.toLowerCase().includes(input));
             
             if (filtered.length === 0) {
                 dropdown.style.display = "none";
                 return;
             }
 
-            filtered.forEach((country, index) => {
+            filtered.forEach((Campus, index) => {
                 let item = document.createElement("div");
-                item.textContent = country;
-                item.onclick = () => goToCountry(country);
+                item.textContent = Campus;
+                item.onclick = () => goToCampus(Campus);
                 dropdown.appendChild(item);
             });
 
@@ -189,7 +191,7 @@
                 selectedIndex = (selectedIndex - 1 + items.length) % items.length;
             } else if (event.key === "Enter") {
                 if (selectedIndex >= 0) {
-                    goToCountry(items[selectedIndex].textContent);
+                    goToCampus(items[selectedIndex].textContent);
                 }
             }
 
@@ -202,14 +204,27 @@
             }
         }
 
-        // 선택한 국가로 이동
-        function goToCountry(country) {
-            window.location.href = `https://example.com/${country}`;
-        }
+        // 선택한 캠퍼스 인스타로 이동
+        function goToCampus(Campus) {
+            const urlMapping = {
+                "USA": "https://example.com/usa",
+                "Korea": "https://example.com/abc",
+                "Japan": "https://example.com/japan",
+                "Germany": "https://example.com/germany",
+                "France": "https://example.com/france",
+                "UK": "https://example.com/uk",
+                "China": "https://example.com/china",
+                "India": "https://example.com/india"
+    };
+
+    // 선택한 국가에 대한 URL을 가져오고 기본 URL을 사용
+    const url = urlMapping[Campus] || "https://example.com/default";
+    window.location.href = url;
+}
 
         // 모달 외부 클릭 시 닫기
         window.onclick = function(event) {
-            let modal = document.getElementById("countryModal");
+            let modal = document.getElementById("CampusModal");
             if (event.target === modal) {
                 closeModal();
             }
