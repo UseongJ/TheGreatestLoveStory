@@ -3,29 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>예제</title>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            font-family: 'Nanum Gothic', sans-serif; /* 폰트 설정 */
+            font-family: 'Nanum Gothic', sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
-            background-image: url('https://github.com/UseongJ/YYY/blob/main/images/popopo.png?raw=true'); /* 배경 이미지 URL */
+            /* 배경 이미지 URL */
+            background-image: url('https://github.com/UseongJ/YYY/blob/main/images/popopo.png?raw=true');
             background-size: contain; /* 배경 이미지 크기 조절 */
             background-position: top left; /* 배경 이미지 위치 조절: 왼쪽 위 */
             background-size: cover; /* 배경 이미지 크기 조절: 화면을 꽉 채움 */
             background-repeat: no-repeat; /* 배경 이미지 반복 방지 */
         }
+
         .container {
-            padding: 20px; /*쿼트박스 위치 조절*/
+            /*쿼트박스 위치 조절*/
+            padding: 20px;
         }
+
         .quote-box {
             background-color: #ffffff;
             padding: 45px 35px; /*상하, 좌우 문단 여백 설정 */
             text-align: left; /*왼쪽정렬*/
             line-height: 1.5; /*줄 간격*/
-            margin-top: 230px;/* 위쪽 여백 */
+            margin-top: 230px; /* 위쪽 여백 */
             margin-left: 10%; /* 왼쪽 여백 10% */
             margin-right: 10%; /* 오른쪽 여백 10% */
             border-radius: 12px;
@@ -33,20 +39,31 @@
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
             font-size: 15px; /*글자 크기*/
             font-weight: bold;
-    /* 크기 고정 */
-    max-width: 600px;
-    height: 180px;
-    overflow: auto; /* 넘칠 경우 스크롤 */
+            max-width: 600px;
+            height: 180px;
+            overflow: auto;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
+        .quote-box img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+
+        /*버튼 스타일*/
         .button {
-    margin-top: 80px; /* 위쪽 여백 */
-    padding: 10px 20px;
-    background-color: #007bf0; /*버튼 디자인*/
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+            margin-top: 80px; /* 위쪽 여백 */
+            padding: 10px 20px;
+            background-color: #007bf0; /*버튼 디자인*/
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         /* 모달 스타일 */
         .modal {
             display: none;
@@ -109,11 +126,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-
-        <!-- 랜덤 성구 출력 -->
-        <div class="quote-box" id="quoteBox">Loading...</div>
+        <!-- 랜덤 성구 출력 (초기 상태는 이미지) -->
+        <div class="quote-box" id="quoteBox" onclick="toggleQuote()">
+            <img src="https://github.com/UseongJ/YYY/blob/main/images/popopo.png?raw=true" id="quoteImage">
+        </div>
 
         <!-- 대학 선택 버튼 -->
         <button class="button" onclick="openModal()">우리학교 CCC 찾기</button>
@@ -133,13 +152,31 @@
     </div>
 
     <script>
-        // 랜덤 명언 설정
+        //랜덤 성구 목록
         const quotes = [
 "삼가 누가 누구에게든지 악으로 악을 갚지 말게 하고 서로 대하든지 모든 사람을 대하든지 항상 선을 따르라 항상 기뻐하라 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라\n\n[데살로니가전서 5:15-18]",
 "Do what you can, with what you have, where you are.",
 "Success is not final, failure is not fatal: it is the courage to continue that counts."
         ];
-        document.getElementById("quoteBox").innerText = quotes[Math.floor(Math.random() * quotes.length)];
+        let isImageVisible = false;
+
+        function toggleQuote() {
+            const quoteBox = document.getElementById("quoteBox");
+
+            if (isImageVisible) {
+                                        // GIF 주소
+                quoteBox.innerHTML = '<img src="https://blog.kakaocdn.net/dn/tToNP/btsvPnc77bN/0P5cqJMFM8hpaQcrIbK6v1/img.gif" style="max-width:100%">';
+                setTimeout(() => {
+                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                    quoteBox.innerHTML = randomQuote;
+                }, 1500); // 1.5초 지연
+            } else {
+                quoteBox.innerHTML = '<img src="https://github.com/UseongJ/YYY/blob/main/images/popopo.png?raw=true">';
+            }
+
+            isImageVisible = !isImageVisible;
+        }
+
         //  리스트
         const countries = ["USA", "Korea", "Japan", "Germany", "France", "UK", "China", "India"];
         let selectedIndex = -1; // 선택된 리스트 인덱스
