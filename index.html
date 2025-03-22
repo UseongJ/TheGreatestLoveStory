@@ -33,12 +33,12 @@
       padding: 45px 35px;
       /* 위쪽 여백을 CSS 변수로 설정 */
       margin-top: var(--loading-top-margin);
-      height: 300px;
+      height: 240px;
       margin-left: 10%;
       margin-right: 10%;
       border-radius: 12px;
       box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      font-size: 20px;
+      font-size: 17px;
       max-width: 600px;
       overflow: auto;
       cursor: pointer;
@@ -80,7 +80,7 @@
     /* 버튼을 화면 하단 중앙에 고정 */
     .button {
       position: fixed;
-      bottom: 20px;
+      bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
       padding: 15px 40px;
@@ -165,7 +165,7 @@
       <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h3>대학 선택</h3>
-        <p>누르면 사이트로 이동합니다</p>
+        <p>누르면 CCC 인스타로 이동합니다</p>
         <div class="dropdown">
           <input type="text" id="searchBox" placeholder="대학 검색 ex)서울대학교" onkeyup="filterCountries()" onkeydown="navigateList(event)">
           <div id="dropdownList" class="dropdown-list"></div>
