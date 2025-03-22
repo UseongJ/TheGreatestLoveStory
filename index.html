@@ -1,269 +1,280 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>여우야 여우야 뭐하니~</title>
+  <link href="https://fonts.googleapis.com/css2?family=42dot+Sans:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://github.com/UseongJ/YYY/blob/main/images/background.jpg?raw=true');
+      background-size: cover;
+      background-position: top left;
+      background-repeat: no-repeat;
+    }
 
-    <title>여우야 여우야 뭐하니~</title>
-    <link href="https://fonts.googleapis.com/css2?family=42dot Sans:wght@400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Nanum Gothic', sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            /* 배경 이미지 URL */
-            background-image: url('https://github.com/UseongJ/YYY/blob/main/images/background.jpg?raw=true');
-            background-size: contain; /* 배경 이미지 크기 조절 */
-            background-position: top left; /* 배경 이미지 위치 조절: 왼쪽 위 */
-            background-size: cover; /* 배경 이미지 크기 조절: 화면을 꽉 채움 */
-            background-repeat: no-repeat; /* 배경 이미지 반복 방지 */
-        }
+    .container {
+      padding: 20px;
+    }
 
-        .container {
-            /*쿼트박스 위치 조절*/
-            padding: 20px;
-        }
+    .quote-box {
+      /* 출력(성구) 단계 기본 스타일 (하얀 박스) */
+      background-color: rgba(248, 249, 250, 0.65);
+      padding: 45px 35px;
+      text-align: left;
+      line-height: 1.3;
+      margin-top: 180px;
+      height: 300px;
+      margin-left: 10%;
+      margin-right: 10%;
+      border-radius: 12px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      font-size: 20px;
+      font-weight: bold;
+      max-width: 600px;
+      overflow: auto;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .quote-box {
-            background-color: #ffffff;
-            padding: 45px 35px; /*상하, 좌우 문단 여백 설정 */
-            text-align: left; /*왼쪽정렬*/
-            line-height: 1.3; /*줄 간격*/
-            margin-top: 180px; /* 위쪽 여백 */
-            height: 300px; /*높이*/
-            margin-left: 10%; /* 왼쪽 여백 10% */
-            margin-right: 10%; /* 오른쪽 여백 10% */
-            border-radius: 12px;
-            background-color: rgba(248, 249, 250, 0.8); /* 배경색 투명도 조절 */
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            font-size: 20px; /*글자 크기*/
-            font-weight: bold;
-            max-width: 600px;
-            overflow: auto;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    /* 대기 및 로딩 단계에서 하얀 박스 숨기기 위한 클래스 */
+    .no-background {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
 
-        .quote-box img {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 10px;
-        }
+    .quote-box img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 10px;
+    }
 
-        /*버튼 스타일*/
-        .button {
-            margin-top: 80px; /* 위쪽 여백 */
-            padding: 10px 20px;
-            background-color: #007bf0; /*버튼 디자인*/
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        /* 모달 스타일 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 400px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-            text-align: left;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 20px;
-            cursor: pointer;
-        }
-        .close:hover {
-            color: black;
-        }
-        input {
-        width: calc(100% - 30px); /* 입력란의 너비를 100%에서 패딩을 뺀 값으로 설정 */
-        padding: 10px;
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        }
-        /* 자동완성 리스트 */
-        .dropdown {
-            position: relative;
-            width: 100%;
-        }
-        .dropdown-list {
-            position: absolute;
-            width: 100%;
-            background-color: white;
-            border: 1px solid #ccc;
-            max-height: 150px;
-            overflow-y: auto;
-            display: none;
-            z-index: 1000;
-        }
-        .dropdown-list div {
-            padding: 10px;
-            cursor: pointer;
-        }
-        .dropdown-list div:hover, .dropdown-list .selected {
-            background-color: #007bff;
-            color: white;
-        }
-    </style>
+    /* 버튼 스타일 */
+    .button {
+      margin-top: 80px;
+      padding: 10px 20px;
+      background-color: #007bf0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* 모달 스타일 */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .modal-content {
+      background-color: white;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 400px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+      text-align: left;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: black;
+    }
+    input {
+      width: calc(100% - 30px);
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    /* 자동완성 리스트 */
+    .dropdown {
+      position: relative;
+      width: 100%;
+    }
+    .dropdown-list {
+      position: absolute;
+      width: 100%;
+      background-color: white;
+      border: 1px solid #ccc;
+      max-height: 150px;
+      overflow-y: auto;
+      display: none;
+      z-index: 1000;
+    }
+    .dropdown-list div {
+      padding: 10px;
+      cursor: pointer;
+    }
+    .dropdown-list div:hover, .dropdown-list .selected {
+      background-color: #007bff;
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="container">
-        <!-- 랜덤 성구 출력 (초기 상태는 이미지) -->
-        <div class="quote-box" id="quoteBox" onclick="toggleQuote()">
-            <img src="https://github.com/UseongJ/YYY/blob/main/images/popopo.png?raw=true" id="quoteImage">
-        </div>
-
-        <!-- 대학 선택 버튼 -->
-        <button class="button" onclick="openModal()">우리학교 CCC 찾기</button>
-
-        <!-- 모달 -->
-        <div id="CampusModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h3>대학 선택</h3>
-                <p>누르면 사이트로 이동합니다</p>
-                <div class="dropdown">
-                    <input type="text" id="searchBox" placeholder="대학 검색..." onkeyup="filterCountries()" onkeydown="navigateList(event)">
-                    <div id="dropdownList" class="dropdown-list"></div>
-                </div>
-            </div>
-        </div>
+  <div class="container">
+    <!-- 초기 대기 단계: no-background 적용 -->
+    <div class="quote-box no-background" id="quoteBox" onclick="toggleQuote()">
+      <img src="https://github.com/UseongJ/YYY/blob/main/images/popopo.png?raw=true" id="quoteImage">
     </div>
 
-    <script>
-        //랜덤 성구 목록
-        const quotes = [
-"삼가 누가 누구에게든지 악으로 악을 갚지 말게 하고 서로 대하든지 모든 사람을 대하든지 항상 선을 따르라 항상 기뻐하라 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라\n<br><br>[데살로니가전서 5:15-18]"
-        ];
-        let isImageVisible = false;
+    <!-- 대학 선택 버튼 -->
+    <button class="button" onclick="openModal()">우리학교 CCC 찾기</button>
 
-        function toggleQuote() {
-            const quoteBox = document.getElementById("quoteBox");
+    <!-- 모달 -->
+    <div id="CampusModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>대학 선택</h3>
+        <p>누르면 사이트로 이동합니다</p>
+        <div class="dropdown">
+          <input type="text" id="searchBox" placeholder="대학 검색... ex)서울대학교" onkeyup="filterCountries()" onkeydown="navigateList(event)">
+          <div id="dropdownList" class="dropdown-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            if (isImageVisible) {
-                                        // GIF 주소
-                quoteBox.innerHTML = '<img src="https://blog.kakaocdn.net/dn/tToNP/btsvPnc77bN/0P5cqJMFM8hpaQcrIbK6v1/img.gif" style="max-width:100%">';
-                setTimeout(() => {
-                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-                    quoteBox.innerHTML = randomQuote;
-                }, 1500); // 1.5초 지연
-            } else {
-                quoteBox.innerHTML = '<img src="https://github.com/UseongJ/YYY/blob/main/images/popopo.png?raw=true">';
-            }
+  <script>
+    // 랜덤 성구 목록
+    const quotes = [
+      "삼가 누가 누구에게든지 악으로 악을 갚지 말게 하고 서로 대하든지 모든 사람을 대하든지 항상 선을 따르라 항상 기뻐하라 쉬지 말고 기도하라 범사에 감사하라 이것이 그리스도 예수 안에서 너희를 향하신 하나님의 뜻이니라<br><br>[데살로니가전서 5:15-18]"
+    ];
+    
+    // 상태를 나타내는 변수: 초기 상태는 'waiting'
+    // 상태: 'waiting' (대기), 'loading' (로딩), 'display' (출력)
+    let currentPhase = 'waiting';
 
-            isImageVisible = !isImageVisible;
+    function toggleQuote() {
+      const quoteBox = document.getElementById("quoteBox");
+
+      if (currentPhase === 'waiting') {
+        // 대기 -> 로딩: no-background 유지하며 로딩 GIF 표시
+        quoteBox.classList.add("no-background");
+        quoteBox.innerHTML = '<img src="https://blog.kakaocdn.net/dn/tToNP/btsvPnc77bN/0P5cqJMFM8hpaQcrIbK6v1/img.gif" style="max-width:60%">';
+        currentPhase = 'loading';
+        // 로딩 후 1.5초 뒤 출력 단계로 전환
+        setTimeout(() => {
+          quoteBox.classList.remove("no-background");
+          const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+          quoteBox.innerHTML = randomQuote;
+          currentPhase = 'display';
+        }, 1500);
+      } else if (currentPhase === 'display') {
+        // 출력 상태에서 다시 클릭하면 대기 상태로 전환
+        quoteBox.classList.add("no-background");
+        quoteBox.innerHTML = '<img src="https://github.com/UseongJ/YYY/blob/main/images/popopo.png?raw=true">';
+        currentPhase = 'waiting';
+      }
+    }
+
+    // 대학(국가) 목록
+    const countries = ["USA", "Korea", "Japan", "Germany", "France", "UK", "China", "India"];
+    let selectedIndex = -1;
+
+    // 모달 열기
+    function openModal() {
+      document.getElementById("CampusModal").style.display = "block";
+      document.getElementById("searchBox").focus();
+    }
+
+    // 모달 닫기
+    function closeModal() {
+      document.getElementById("CampusModal").style.display = "none";
+      document.getElementById("dropdownList").style.display = "none";
+    }
+
+    // 검색창 입력 시 자동완성 리스트 필터링
+    function filterCountries() {
+      let input = document.getElementById("searchBox").value.toLowerCase();
+      let dropdown = document.getElementById("dropdownList");
+      dropdown.innerHTML = "";
+      selectedIndex = -1;
+
+      let filtered = countries.filter(campus => campus.toLowerCase().includes(input));
+      
+      if (filtered.length === 0) {
+        dropdown.style.display = "none";
+        return;
+      }
+
+      filtered.forEach((campus, index) => {
+        let item = document.createElement("div");
+        item.textContent = campus;
+        item.onclick = () => goToCampus(campus);
+        dropdown.appendChild(item);
+      });
+
+      dropdown.style.display = "block";
+    }
+
+    // 방향키(↑/↓) 및 Enter 키 처리
+    function navigateList(event) {
+      let dropdown = document.getElementById("dropdownList");
+      let items = dropdown.getElementsByTagName("div");
+
+      if (event.key === "ArrowDown") {
+        selectedIndex = (selectedIndex + 1) % items.length;
+      } else if (event.key === "ArrowUp") {
+        selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+      } else if (event.key === "Enter") {
+        if (selectedIndex >= 0) {
+          goToCampus(items[selectedIndex].textContent);
         }
+      }
 
-        //  리스트
-        const countries = ["USA", "Korea", "Japan", "Germany", "France", "UK", "China", "India"];
-        let selectedIndex = -1; // 선택된 리스트 인덱스
+      // 선택 상태 업데이트
+      for (let i = 0; i < items.length; i++) {
+        items[i].classList.remove("selected");
+      }
+      if (selectedIndex >= 0) {
+        items[selectedIndex].classList.add("selected");
+      }
+    }
 
-        // 모달 열기
-        function openModal() {
-            document.getElementById("CampusModal").style.display = "block";
-            document.getElementById("searchBox").focus();
-        }
+    // 선택한 캠퍼스(국가) URL로 이동
+    function goToCampus(campus) {
+      const urlMapping = {
+        "USA": "https://example.com/usa",
+        "Korea": "https://example.com/abc",
+        "Japan": "https://example.com/japan",
+        "Germany": "https://example.com/germany",
+        "France": "https://example.com/france",
+        "UK": "https://example.com/uk",
+        "China": "https://example.com/china",
+        "India": "https://example.com/india"
+      };
 
-        // 모달 닫기
-        function closeModal() {
-            document.getElementById("CampusModal").style.display = "none";
-            document.getElementById("dropdownList").style.display = "none";
-        }
+      const url = urlMapping[campus] || "https://example.com/default";
+      window.location.href = url;
+    }
 
-        // 검색창 입력 시 자동완성 리스트 필터링
-        function filterCountries() {
-            let input = document.getElementById("searchBox").value.toLowerCase();
-            let dropdown = document.getElementById("dropdownList");
-            dropdown.innerHTML = "";
-            selectedIndex = -1;
-
-            let filtered = countries.filter(Campus => Campus.toLowerCase().includes(input));
-            
-            if (filtered.length === 0) {
-                dropdown.style.display = "none";
-                return;
-            }
-
-            filtered.forEach((Campus, index) => {
-                let item = document.createElement("div");
-                item.textContent = Campus;
-                item.onclick = () => goToCampus(Campus);
-                dropdown.appendChild(item);
-            });
-
-            dropdown.style.display = "block";
-        }
-
-        // 방향키(↑/↓) 및 Enter 키 처리
-        function navigateList(event) {
-            let dropdown = document.getElementById("dropdownList");
-            let items = dropdown.getElementsByTagName("div");
-
-            if (event.key === "ArrowDown") {
-                selectedIndex = (selectedIndex + 1) % items.length;
-            } else if (event.key === "ArrowUp") {
-                selectedIndex = (selectedIndex - 1 + items.length) % items.length;
-            } else if (event.key === "Enter") {
-                if (selectedIndex >= 0) {
-                    goToCampus(items[selectedIndex].textContent);
-                }
-            }
-
-            // 선택 상태 업데이트
-            for (let i = 0; i < items.length; i++) {
-                items[i].classList.remove("selected");
-            }
-            if (selectedIndex >= 0) {
-                items[selectedIndex].classList.add("selected");
-            }
-        }
-
-        // 선택한 캠퍼스 인스타로 이동
-        function goToCampus(Campus) {
-            const urlMapping = {
-                "USA": "https://example.com/usa",
-                "Korea": "https://example.com/abc",
-                "Japan": "https://example.com/japan",
-                "Germany": "https://example.com/germany",
-                "France": "https://example.com/france",
-                "UK": "https://example.com/uk",
-                "China": "https://example.com/china",
-                "India": "https://example.com/india"
-    };
-
-    // 선택한 국가에 대한 URL을 가져오고 기본 URL을 사용
-    const url = urlMapping[Campus] || "https://example.com/default";
-    window.location.href = url;
-}
-
-        // 모달 외부 클릭 시 닫기
-        window.onclick = function(event) {
-            let modal = document.getElementById("CampusModal");
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-    </script>
+    // 모달 외부 클릭 시 닫기
+    window.onclick = function(event) {
+      let modal = document.getElementById("CampusModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
 </body>
 </html>
