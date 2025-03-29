@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>여우야 여우야 뭐하니~</title>
-  <link href="https://fonts.googleapis.com/css2?family=42dot+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -13,7 +13,7 @@
     }
     
     body {
-      font-family: 'Nanum Gothic', sans-serif;
+      font-family: 'Noto Serif KR', sans-serif;
       text-align: center;
       margin: 0;
       padding: 0;
@@ -68,7 +68,7 @@
     }
     
     .quote-text {
-      text-align: left;
+      text-align: center;
       width: 100%;
       font-weight: normal;
       line-height: 1.3;
@@ -189,7 +189,7 @@
       if (currentPhase === 'waiting') {
         // 대기 -> 로딩: no-background 클래스 적용하여 로딩 GIF 표시
         quoteBox.classList.add("no-background");
-        quoteBox.innerHTML = '<img src="https://github.com/UseongJ/TheGreatestLoveStory/blob/main/images/fox_loading.gif?raw=true" style="max-width:60%">';
+        quoteBox.innerHTML = '<img src="https://github.com/UseongJ/TheGreatestLoveStory/blob/main/images/fox_loading.gif?raw=true" style="max-width:100%">';
         currentPhase = 'loading';
         // 1.5초 후 출력 단계로 전환
         setTimeout(() => {
@@ -206,8 +206,8 @@
       }
     }
     
-    // 대학(국가) 목록
-    const countries = ["USA", "Korea", "Japan", "Germany", "France", "UK", "China", "India"];
+    // 대학 목록
+    const countries = ["강서대학교","동양미래대학교","백석예술대학교","서울대학교","서울교육대학교","숭실대학교","중앙대학교","총신대학교","서일대학교","세종대학교","한양대학교","한양여자대학교","건국대학교","고려대학교","국민대학교","동덕여자대학교","서경대학교","성신여자대학교","광운대학교","서울과학기술대학교","서울여자대학교","인덕대학교","한국성서대학교","경희대학교","서울시립대학교","한국외국어대학교","덕성여자대학교","배화여자대학교","성균관대학교","한성대학교","명지대학교","명지전문대학교","서강대학교","연세대학교","이화여자대학교","중부대학교","한국항공대학교","홍익대학교","동국대학교","상명대학교","숙명여자대학교","숭의여자대학교"];
     let selectedIndex = -1;
     
     function openModal() {
@@ -267,17 +267,50 @@
     
     function goToCampus(campus) {
       const urlMapping = {
-        "USA": "https://example.com/usa",
-        "Korea": "https://example.com/abc",
-        "Japan": "https://example.com/japan",
-        "Germany": "https://example.com/germany",
-        "France": "https://example.com/france",
-        "UK": "https://example.com/uk",
-        "China": "https://example.com/china",
-        "India": "https://example.com/india"
+        "강서대학교": "https://www.instagram.com/gangseo_ccc/",
+        "동양미래대학교": "https://www.instagram.com/dmuccc/",
+        "백석예술대학교": "https://www.instagram.com/bauccc/",
+        "서울대학교": "https://www.instagram.com/snu_ccc/",
+        "서울교육대학교": "https://www.instagram.com/snueccc/",
+        "숭실대학교": "https://www.instagram.com/ssuccc",
+        "중앙대학교": "https://www.instagram.com/cauccc/",
+        "서일대학교": "https://www.instagram.com/seoil_ccc",
+        "세종대학교": "https://www.instagram.com/sejong.univ_ccc/",
+        "한양대학교": "https://www.instagram.com/hyu_ccc",
+        "한양여자대학교": "https://www.instagram.com/hywuccc",
+        "건국대학교": "https://www.instagram.com/ccc_konkuk",
+        "고려대학교": "https://www.instagram.com/koreanunivccc",
+        "국민대학교": "https://www.instagram.com/kmu_ccc",
+        "동덕여자대학교": "https://www.instagram.com/dongduk_ccc",
+        "서경대학교": "https://www.instagram.com/sku_ccc",
+        "성신여자대학교": "https://www.instagram.com/sswu_ccc",
+        "광운대학교": "https://www.instagram.com/kw_ccc",
+        "서울과학기술대학교": "https://www.instagram.com/seoultech_ccc",
+        "서울여자대학교": "https://www.instagram.com/swu_ccc",
+        "인덕대학교": "https://www.instagram.com/induk_univ_ccc",
+        "한국성서대학교": "https://www.instagram.com/kokkos_ccc",
+        "경희대학교": "https://www.instagram.com/khu_ccc",
+        "서울시립대학교": "https://www.instagram.com/uos_ccc",
+        "한국외국어대학교": "https://www.instagram.com/hufs.ccc",
+        "덕성여자대학교": "https://www.instagram.com/duksung_ccc",
+        "배화여자대학교": "https://www.instagram.com/baewha_ccc",
+        "성균관대학교": "https://www.instagram.com/skku_ccc",
+        "한성대학교": "https://www.instagram.com/hansungccc",
+        "명지대학교": "https://www.instagram.com/myungjiccc",
+        "명지전문대학교": "https://www.instagram.com/myungjiccc",
+        "서강대학교": "https://www.instagram.com/sogang_ccc",
+        "연세대학교": "https://www.instagram.com/yonseiccc",
+        "이화여자대학교": "https://www.instagram.com/ewhaccc",
+        "중부대학교": "https://www.instagram.com/joongbu_ccc",
+        "한국항공대학교": "https://www.instagram.com/kau_ccc",
+        "홍익대학교": "https://www.instagram.com/hongikccc",
+        "동국대학교": "https://www.instagram.com/dongguk_ccc",
+        "상명대학교": "https://www.instagram.com/seoul_smu_ccc",
+        "숙명여자대학교": "https://www.instagram.com/sookmyung_ccc",
+        "숭의여자대학교": "https://www.instagram.com/sewu_ccc"
       };
       
-      const url = urlMapping[campus] || "https://example.com/default";
+      const url = urlMapping[campus] || "https://www.instagram.com/default";
       window.location.href = url;
     }
     
