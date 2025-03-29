@@ -197,7 +197,7 @@
           const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
           quoteBox.innerHTML = '<div class="quote-text">' + randomQuote + '</div>';
           currentPhase = 'display';
-        }, 1500);
+        }, 3000);
       } else if (currentPhase === 'display') {
         // 출력 상태에서 다시 클릭하면 대기 상태로 전환 (위쪽 여백은 유지)
         quoteBox.classList.add("no-background");
